@@ -11,7 +11,7 @@ def main():
     predictor = ChurnPredictor()
     
     # Path to training data
-    data_path = r'D:\Neurotech\credit card\Etisalat_UseCase\WA_Fn-UseC_-Telco-Customer-Churn.csv'
+    data_path = 'data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv'
     
     # Train model
     predictor.train_pipeline(data_path)

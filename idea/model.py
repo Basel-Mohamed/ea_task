@@ -32,7 +32,7 @@ from sklearn.ensemble import VotingClassifier
 
 
 #loading data
-df = pd.read_csv(r'D:\Neurotech\credit card\Etisalat_UseCase\WA_Fn-UseC_-Telco-Customer-Churn.csv')
+df = pd.read_csv('../data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv')
 
 # Data preprocessing
 df = df.drop(['customerID'], axis = 1)

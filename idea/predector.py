@@ -177,51 +177,11 @@ class ChurnPredictor:
             'retention_probability': probability[0]
         }
     
-    def predict_batch(self, data_path):
-        """Predict churn for multiple customers from CSV"""
-        if self.model is None:
-            raise ValueError("Model not loaded. Load or train a model first.")
-        
-        # Load data
-        df = pd.read_csv(data_path)
-        
-        # Store customer IDs if present
-        customer_ids = df['customerID'] if 'customerID' in df.columns else None
-        
-        # Remove unnecessary columns
-        df = df.drop(['customerID'], axis=1, errors='ignore')
-        if 'Churn' in df.columns:
-            df = df.drop(['Churn'], axis=1)
-        
-        # Preprocess
-        df['Total_Charges'] = pd.to_numeric(df['Total_Charges'], errors='coerce')
-        df['Total_Charges'].fillna(df['Total_Charges'].mean(), inplace=True)
-        
-        # Encode and prepare
-        df_encoded = self.encode_features(df, is_training=False)
-        df_prepared = self.prepare_features(df_encoded, is_training=False)
-        
-        # Predict
-        predictions = self.model.predict(df_prepared)
-        probabilities = self.model.predict_proba(df_prepared)
-        
-        # Create results DataFrame
-        results = pd.DataFrame({
-            'churn_prediction': ['Yes' if p == 1 else 'No' for p in predictions],
-            'churn_probability': probabilities[:, 1],
-            'retention_probability': probabilities[:, 0]
-        })
-        
-        if customer_ids is not None:
-            results.insert(0, 'customerID', customer_ids)
-        
-        return results
-
 
 # Example usage
 if __name__ == "__main__":
     # Initialize predictor
-    predictor = ChurnPredictor(r'D:\Neurotech\credit card\Etisalat_UseCase\WA_Fn-UseC_-Telco-Customer-Churn.csv')
+    predictor = ChurnPredictor('../data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv')
     
     # Train model
     predictor.train()
@@ -237,7 +197,7 @@ if __name__ == "__main__":
         'Dependents': 'No',
         'tenure': 12,
         'Phone_Service': 'No',
-        'Dual': 'No',  # Changed from Multiple_Lines
+        'Dual': 'No',  
         'Internet_Service': 'Fiber optic',
         'Online_Security': 'No',
         'Online_Backup': 'No',

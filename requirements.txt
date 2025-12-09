@@ -7,3 +7,10 @@ scikit-learn==1.7.2
 joblib==1.5.2
 groq==0.37.1
 python-dotenv==1.0.0
+
+# for notebook
+missingno
+plotly
+xgboost
+catboost
+nbformat

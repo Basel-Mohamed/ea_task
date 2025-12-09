@@ -46,22 +46,6 @@ def predict_single_customer():
     return result
 
 
-def predict_batch_customers(input_path: str, output_path: str = 'predictions.csv'):
-    # \"\"\"Predict for multiple customers\"\"\"
-    # Load model
-    predictor = ChurnPredictor()
-    predictor.load()
-    
-    # Predict
-    results = predictor.predict_batch(input_path)
-    
-    # Save results
-    results.to_csv(output_path, index=False)
-    print(f"\nBatch predictions saved to: {output_path}")
-    
-    return results
-
-
 if __name__ == "__main__":
     print("Running single customer prediction...")
     predict_single_customer()

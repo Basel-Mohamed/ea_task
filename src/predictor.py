@@ -131,37 +131,6 @@ class ChurnPredictor:
             'risk_level': self._get_risk_level(probabilities[1])
         }
     
-    def predict_batch(self, data_path: str) -> pd.DataFrame:
-        """Predict churn for multiple customers"""
-        if not self.is_trained:
-            raise ValueError("Model not loaded. Load or train model first.")
-        
-        # Load data
-        df = self.data_processor.load_data(data_path)
-        
-        # Store customer IDs
-        customer_ids = df['customerID'].values if 'customerID' in df.columns else None
-        
-        # Prepare data
-        X_prepared, _ = self.data_processor.prepare_data(df, is_training=False)
-        
-        # Predict
-        predictions = self.model.predict(X_prepared)
-        probabilities = self.model.predict_proba(X_prepared)
-        
-        # Create results
-        results = pd.DataFrame({
-            'churn_prediction': ['Yes' if p == 1 else 'No' for p in predictions],
-            'churn_probability': probabilities[:, 1],
-            'retention_probability': probabilities[:, 0],
-            'risk_level': [self._get_risk_level(p) for p in probabilities[:, 1]]
-        })
-        
-        if customer_ids is not None:
-            results.insert(0, 'customerID', customer_ids)
-        
-        return results
-    
     @staticmethod
     def _get_risk_level(probability: float) -> str:
         """Categorize churn risk"""
