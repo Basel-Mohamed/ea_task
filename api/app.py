@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.predictor import ChurnPredictor
 from src.utils import validate_input_data, format_prediction_response
 
-from chatbot_service import ChurnChatbotService
+from .chatbot_service import ChurnChatbotService
 import uuid
 
 app = Flask(__name__)
