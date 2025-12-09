@@ -199,4 +199,9 @@ def reset_chat():
         
         
 if __name__ == '__main__':
+    # Development
     app.run(debug=True, host='0.0.0.0', port=5000)
+else:
+    # Production (Render will use this)
+    # Gunicorn will handle the app
+    pass
