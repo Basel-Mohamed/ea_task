@@ -113,11 +113,11 @@ def chat():
                 customer_id = prediction_result.get('customerID', 'N/A')
                 
                 friendly_response = f"""
-📊 **Churn Prediction Results for Customer {customer_id}**
+📊 Churn Prediction Results for Customer {customer_id}
 
-🎯 **Prediction:** {prediction}
-📈 **Churn Probability:** {churn_prob:.1%}
-⚠️ **Risk Level:** {risk_level}
+🎯 Prediction: {prediction}
+📈 Churn Probability: {churn_prob:.1%}
+⚠️ Risk Level: {risk_level}
 
 """
                 
